@@ -1,108 +1,109 @@
 // Chat Widget Script
 (function() {
-    // Create and inject styles
     const styles = `
         .n8n-chat-widget {
-            --chat--color-primary: var(--n8n-chat-primary-color, #854fff);
-            --chat--color-secondary: var(--n8n-chat-secondary-color, #6b3fd4);
-            --chat--color-background: var(--n8n-chat-background-color, #ffffff);
-            --chat--color-font: var(--n8n-chat-font-color, #333333);
+            --chat--color-primary: #854fff;
+            --chat--color-secondary: #6b3fd4;
+            --chat--color-background: #ffffff;
+            --chat--color-font: #333333;
             font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-
-        .n8n-chat-widget .chat-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 1000;
+            z-index: 10000;
+        }
+
+        .n8n-chat-widget .chat-container {
             display: none;
             width: 380px;
-            max-width: calc(100vw - 40px);
             height: 600px;
+            max-width: calc(100vw - 40px);
             max-height: calc(100vh - 40px);
             background: var(--chat--color-background);
             border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(133, 79, 255, 0.15);
-            border: 1px solid rgba(133, 79, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(133,79,255,0.15);
+            border: 1px solid rgba(133,79,255,0.2);
             overflow: hidden;
-            font-family: inherit;
+            flex-direction: column;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10001;
         }
 
         .n8n-chat-widget .chat-container.open {
             display: flex;
+        }
+
+        .n8n-chat-widget .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
             flex-direction: column;
+        }
+
+        .n8n-chat-widget .chat-input {
+            padding: 12px;
+            border-top: 1px solid rgba(133,79,255,0.1);
+            display: flex;
+            gap: 8px;
+        }
+
+        .n8n-chat-widget .chat-input textarea {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(133,79,255,0.2);
+            resize: none;
+            font-size: 14px;
+        }
+
+        .n8n-chat-widget .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10002;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
         }
 
         /* --- Mobil tam ekran --- */
         @media (max-width: 768px) {
-            .n8n-chat-widget .chat-container {
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
+            .n8n-chat-widget {
                 bottom: 0 !important;
+                right: 0 !important;
+                left: 0 !important;
+                top: 0 !important;
+            }
+
+            .n8n-chat-widget .chat-container {
                 width: 100vw !important;
                 height: 100vh !important;
                 max-width: 100vw !important;
                 max-height: 100vh !important;
                 border-radius: 0 !important;
+                bottom: 0 !important;
+                right: 0 !important;
+                left: 0 !important;
+                top: 0 !important;
                 display: flex !important;
                 flex-direction: column !important;
-                z-index: 10000 !important;
-                background: var(--chat--color-background) !important;
             }
 
-            /* Toggle butonunu gizle */
             .n8n-chat-widget .chat-toggle {
                 display: none !important;
             }
-
-            /* Chat container’ı otomatik open yap */
-            .n8n-chat-widget .chat-container:not(.open) {
-                display: flex !important;
-            }
-
-            /* Mesaj alanını tam ekran yap */
-            .n8n-chat-widget .chat-messages {
-                flex: 1 !important;
-                overflow-y: auto !important;
-                padding: 16px !important;
-            }
-
-            /* Input alanını biraz büyüt */
-            .n8n-chat-widget .chat-input textarea {
-                font-size: 16px !important;
-            }
-
-            /* Arka plan karartması ekle */
-            .n8n-chat-widget::before {
-                content: "";
-                position: fixed;
-                top:0; left:0; right:0; bottom:0;
-                background: rgba(0,0,0,0.3);
-                z-index: 9999;
-            }
-        }
-
-        @keyframes typing-bounce {
-            0%, 80%, 100% {
-                transform: scale(0.8);
-                opacity: 0.5;
-            }
-            40% {
-                transform: scale(1);
-                opacity: 1;
-            }
         }
     `;
-
-    const styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    styleSheet.innerText = styles;
-    document.head.appendChild(styleSheet);
-})();
-
-
-
     // Inject styles
     const styleSheet = document.createElement('style');
     styleSheet.textContent = styles;
