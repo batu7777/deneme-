@@ -15,9 +15,9 @@ const styles = `
             z-index: 1000;
             display: none;
             width: 380px;
-            max-width: calc(100vw - 100px);
+            max-width: calc(100vw - 10px);
             height: 600px;
-            max-height: calc(100vh - 100px);
+            max-height: calc(100vh - 10px);
             background: var(--chat--color-background);
             border-radius: 12px;
             box-shadow: 0 8px 32px rgba(133, 79, 255, 0.15);
