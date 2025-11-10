@@ -313,7 +313,51 @@
                 transform: scale(1);
                 opacity: 1;
         }
-    `;
+    /* --- Mobil tam ekran --- */
+@media (max-width: 768px) {
+    .n8n-chat-widget .chat-container {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        z-index: 10000 !important;
+    }
+
+    /* Toggle butonunu gizle */
+    .n8n-chat-widget .chat-toggle {
+        display: none !important;
+    }
+
+    /* Chat container’ı otomatik open yap */
+    .n8n-chat-widget .chat-container:not(.open) {
+        display: flex !important;
+    }
+
+    /* Mesaj alanını tam ekran yap */
+    .n8n-chat-widget .chat-messages {
+        flex: 1 !important;
+        overflow-y: auto !important;
+        padding: 16px !important;
+    }
+
+    /* Input alanını biraz büyüt */
+    .n8n-chat-widget .chat-input {
+        padding: 12px !important;
+    }
+
+    .n8n-chat-widget .chat-input textarea {
+        font-size: 16px !important;
+    }
+}
+`;
 
 
     // Inject styles
