@@ -334,9 +334,7 @@
             welcomeText: '',
             responseTimeText: '',
             poweredBy: {
-                text: 'Powered by Batu',
-                link: 'https://duckduck.com.tr'
-            }
+                text: 'Powered by Batu'
         },
         style: {
             primaryColor: '',
